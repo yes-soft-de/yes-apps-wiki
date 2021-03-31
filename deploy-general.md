@@ -49,3 +49,6 @@ Unfortunately, most of the job is done using a single step. it can be divided. B
 Finally we upload the built IPA to TestFlight.
 
 ![ios pipeline](./pipeline-ios.png)
+
+
+
