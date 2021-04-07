@@ -5,8 +5,8 @@ This is one of the more complicated scripts I will ever write in this wiki. To s
 It goes like:
 
 1. Delete the `ios` folder and recreate it using `flutter create --org de.yes-soft .`
-2. Download `Google-Services.plist ` from Firebase.
-3. Drag and Drop the file from the Downloads Folder into the Runner folder <b>IN THE XCODE WINDOW</b>
+2. Download `Google-Services.plist` from Firebase.
+3. Drag and Drop the file from the Downloads Folder into the Runner folder **IN THE XCODE WINDOW**
 4. Create 2 new entitlements to the app, namely we usually need `Apple Push Notification` and `Sign in with Apple`
 5. Open the Google-Services file, and copy the client reserved URL from it.
 6. In Info Tab, Create new URL Type and paste it inside the URL schema past the client reserved URL. ![iOS Url](./ios-url-schema.png)
@@ -14,13 +14,9 @@ It goes like:
 7. Go to the `Runner/info.plist` and add the Appropriate Permissions message. usually of them are located in the privacy section.
 8. For now we will leave the singing automatic.
 
-
-
 Now we have a functioning app, we should be able to test it using `flutter start` depending on the XCode project, we might need a `-d` flag.
 
 Quick note: This app is deployable as-is to the apple store. we can start building and uploading from this stage.
-
-
 
 ## Automating the Upload  with Fastlane
 
@@ -32,9 +28,9 @@ source "https://rubygems.org"
 gem "fastlane"
 ```
 
-next we install fastlane by 
+next we install fastlane by
 
-```
+```sh
 bundle install
 ```
 
@@ -54,9 +50,7 @@ itc_team_id("******") # App Store Connect Team ID
 team_id("****") # Developer Portal Team ID
 ```
 
-Those values can be found in other Yes Soft projects they are mostly the same for every app except of package Id. 
-
-
+Those values can be found in other Yes Soft projects they are mostly the same for every app except of package Id.
 
 Next Match File
 
@@ -101,7 +95,7 @@ platform :ios do
     )
 
     increment_build_number(
-	    build_number: ENV["GITHUB_RUN_NUMBER"]
+      build_number: ENV["GITHUB_RUN_NUMBER"]
     )
 
     build_app(
@@ -114,8 +108,6 @@ platform :ios do
 end
 
 ```
-
-
 
 First we create the key chain, this is similar to key store in Android, using this portion of the script:
 
@@ -147,11 +139,11 @@ match(
 
 Note here that we are using the type `appstore`, this is because we are using transported and direct TestFlight. if we are using Firebase Distribution we would use `adhoc` instead.
 
-Next we set the build number using 
+Next we set the build number using
 
 ```ruby
 increment_build_number(
-	    build_number: ENV["GITHUB_RUN_NUMBER"]
+      build_number: ENV["GITHUB_RUN_NUMBER"]
     )
 ```
 
@@ -176,7 +168,7 @@ build_app(
 
 Again, the export method should be similar to the one used in the Matchfile.
 
-After that we simply upload the file to TestFlight. we can skip the waiting but I like to make sure that the app actually show up. we can upload using 
+After that we simply upload the file to TestFlight. we can skip the waiting but I like to make sure that the app actually show up. we can upload using
 
 ```ruby
 upload_to_testflight
@@ -186,13 +178,13 @@ Now, that we automated everything we need to prepare our app to be signed by the
 
 we can do that by doing 2 things, first we produce a new project in TestFlight using:
 
-```
+```sh
 fastlane produce
 ```
 
 And then we create a new certificates using
 
-```
+```sh
 fastlane match appstore
 ```
 
@@ -204,15 +196,13 @@ After  that we close XCode and reopen it. we go to the project, and we change th
 
 After we do this, we create the GitHub Action workfile and we create a new session by executing:
 
-```
+```sh
 fastlane spaceauth
 ```
 
 After that, we paste the session into FASTLANE_SESSION in GitHub secrets.
 
 Finally we push to the project.
-
-
 
 Note, to optimize the build time, we can do:
 
@@ -221,7 +211,7 @@ Note, to optimize the build time, we can do:
 3. Start the project in the simulator
 4. When it runs it's ready, we can deploy the changes and we shall be OK.
 
-```
+```sh
 Before:    ~ 551s
 After:     ~ 174s
 ```
