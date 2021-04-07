@@ -9,7 +9,7 @@ It goes like:
 3. Drag and Drop the file from the Downloads Folder into the Runner folder <b>IN THE XCODE WINDOW</b>
 4. Create 2 new entitlements to the app, namely we usually need `Apple Push Notification` and `Sign in with Apple`
 5. Open the Google-Services file, and copy the client reserved URL from it.
-6. In Resources Tab, Create new URL Type and paste it inside the URL schema past the client reserved URL. ![iOS Url](./ios-url-schema.png)
+6. In Info Tab, Create new URL Type and paste it inside the URL schema past the client reserved URL. ![iOS Url](./ios-url-schema.png)
 
 7. Go to the `Runner/info.plist` and add the Appropriate Permissions message. usually of them are located in the privacy section.
 8. For now we will leave the singing automatic.
