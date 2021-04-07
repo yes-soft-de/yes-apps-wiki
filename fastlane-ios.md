@@ -190,7 +190,7 @@ fastlane match appstore
 
 If we wanted Firebase Distribution we would use `Adhoc`, keep that in mind!
 
-After a couple of 2FAs we set the password, <b>This password is the one used in the action, So keep it safe and remembered</b>
+After a couple of 2FAs we set the password, **This password is the one used in the action, So keep it safe and remembered**
 
 After  that we close XCode and reopen it. we go to the project, and we change the signing config to manual, and we sign using the created certificates. the process is heavily automated and doesn't take long.
 
