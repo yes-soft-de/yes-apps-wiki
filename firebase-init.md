@@ -55,3 +55,16 @@ We need 3 sections activated in firebase for pretty much any project.
 3. Go to crashlytics section
 4. press "enable crashlytics"
 5. This process should be repeated for every single app connected to Firebase
+
+## Adding it to android
+
+1. Login to [Firebase Console](https://console.firebase.google.com)
+2. Login into the existing project
+3. Go to applications section
+4. download `Google-Services.json`
+5. add the class path `classpath 'com.google.gms:google-services:4.3.3'` to `android/build.gradle`
+6. add the plugin to `android/app/build.gradle` as `apply plugin: 'com.google.gms.google-services'`
+
+## Adding it to iOS
+
+refer to [Prepairing iOS Projects](./prepaire-ios.md)
