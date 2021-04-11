@@ -67,4 +67,37 @@ Note 2: We auto-register users, so you should always include the "I agree on the
 
 Note 3: In case something happen "Other than 403 Error" the error is delivered into firebase crashlytics console. as long as it is activated correctly and enabled there.
 
+## Authorization method and architectre
+
+![Authorization Pipelines](./auth_process.png)
+
+We shall discuss 2 scenarios here:
+
+1. The User is Registering
+
+   ```gherkin
+   Feature: Authorization
+   
+   Scenario: Registering new user
+       GIVEN the user provided a correct credientials
+       WHEN the user request Regiser
+       THEN the user get logged in into firebase
+       AND we generate an random password for that user
+       AND we save the generated password in firestore
+       AND we use the credentials to register the user into our seperate database
+       AND we login the user to our system
+   ```
+
+2. The user us logging in
+
+   ```gherkin
+   Feature: Authorization
+   Scenario: Login a user
+       GIVEN the user privided a correct credentials
+       WHEN the user request login
+       THEN the user get logged in into firebase
+       AND we bring the saved password from firestore
+       THEN the user get logged in into our system
+   ```
+
 Happy Authorization! :joy:
